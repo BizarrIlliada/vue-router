@@ -21,6 +21,12 @@
       UserItem
     },
     inject: ['users', 'teams'],
+    props: {
+      teamId: {
+        type: String,
+        required: true,
+      }
+    },
 
     data() {
       return {
@@ -29,11 +35,23 @@
       };
     },
 
+    methods: {
+      loadTeam(teamId) {
+        console.log(this.$route)
+        const team = this.teams.find(team => team.id === teamId);
+        this.teamName = team.name;
+        this.members = this.users.filter(user => team.members.includes(user.id));
+      }
+    },
+
+    watch: {
+      teamId() {
+        this.loadTeam(this.teamId);
+      },
+    },
+
     created() {
-      console.log(this.$route)
-      const team = this.teams.find(team => team.id === this.$route.params.teamId);
-      this.teamName = team.name;
-      this.members = this.users.filter(user => team.members.includes(user.id));
+      this.loadTeam(this.teamId);
     },
   };
 </script>
