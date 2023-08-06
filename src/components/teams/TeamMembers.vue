@@ -20,14 +20,20 @@
     components: {
       UserItem
     },
+    inject: ['users', 'teams'],
+
     data() {
       return {
         teamName: 'Test',
-        members: [
-          { id: 'u1', fullName: 'Max Schwarz', role: 'Engineer' },
-          { id: 'u2', fullName: 'Max Schwarz', role: 'Engineer' },
-        ],
+        members: [],
       };
+    },
+
+    created() {
+      console.log(this.$route)
+      const team = this.teams.find(team => team.id === this.$route.params.teamId);
+      this.teamName = team.name;
+      this.members = this.users.filter(user => team.members.includes(user.id));
     },
   };
 </script>

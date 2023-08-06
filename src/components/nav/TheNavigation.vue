@@ -3,10 +3,14 @@
     <nav>
       <ul>
         <li>
-          <button @click="setActivePage('TeamsList')">Teams</button>
+          <router-link to="/teams">
+            Teams
+          </router-link>
         </li>
         <li>
-          <button @click="setActivePage('UsersList')">Users</button>
+          <router-link to="/users">
+            Users
+          </router-link>
         </li>
       </ul>
     </nav>
@@ -16,12 +20,6 @@
 <script>
   export default {
     name: 'TheNavigation',
-    emits: ['setPage'],
-    methods: {
-      setActivePage(page) {
-        this.$emit('setPage', page);
-      },
-    },
   };
 </script>
 
@@ -50,8 +48,8 @@
     margin: 0 2rem;
   }
 
-  button {
-    font: inherit;
+  a {
+    text-decoration: none;
     background: transparent;
     border: 1px solid transparent;
     cursor: pointer;
@@ -60,8 +58,9 @@
     display: inline-block;
   }
 
-  button:hover,
-  button:active {
+  a:hover,
+  a:active,
+  a.router-link-active {
     color: #f1a80a;
     border-color: #f1a80a;
     background-color: #1a037e;
