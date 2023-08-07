@@ -1,6 +1,9 @@
 <template>
   <section>
-    <h2>{{ teamName }}</h2>
+    <h2>
+      {{ teamName }}
+      <router-link to="/">X</router-link>
+    </h2>
     <ul>
       <UserItem
         v-for="member in members"
@@ -48,6 +51,10 @@
       teamId() {
         this.loadTeam(this.teamId);
       },
+
+      // $route(newVal) {
+      //   console.log(newVal.query);
+      // },
     },
 
     created() {
@@ -67,6 +74,13 @@
 
   h2 {
     margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
   }
 
   ul {

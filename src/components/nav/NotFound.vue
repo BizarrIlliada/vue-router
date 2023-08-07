@@ -1,13 +1,21 @@
 <template>
   <main>
     <h1>Wrong way</h1>
-    <router-link to="/">Go to the start page</router-link>
+    <router-link :to="homeLink">Go to the start page</router-link>
   </main>
 </template>
 
 <script>
   export default {
     name: 'NotFound',
+
+    computed: {
+      homeLink() {
+        return {
+          name: 'home',
+        }
+      }
+    }
   }
 </script>
 

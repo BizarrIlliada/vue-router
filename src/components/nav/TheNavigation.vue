@@ -3,12 +3,12 @@
     <nav>
       <ul>
         <li>
-          <router-link to="/teams">
+          <router-link :to="teamsNavigationObj">
             Teams
           </router-link>
         </li>
         <li>
-          <router-link to="/users">
+          <router-link :to="usersNavigationObj">
             Users
           </router-link>
         </li>
@@ -20,6 +20,19 @@
 <script>
   export default {
     name: 'TheNavigation',
+
+    computed: {
+      teamsNavigationObj() {
+        return {
+          name: 'teams',
+        }
+      },
+      usersNavigationObj() {
+        return {
+          name: 'users',
+        }
+      },
+    },
   };
 </script>
 
