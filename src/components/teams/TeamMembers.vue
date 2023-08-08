@@ -40,7 +40,7 @@
 
     methods: {
       loadTeam(teamId) {
-        console.log(this.$route)
+        // console.log(this.$route)
         const team = this.teams.find(team => team.id === teamId);
         this.teamName = team.name;
         this.members = this.users.filter(user => team.members.includes(user.id));
@@ -59,6 +59,14 @@
 
     created() {
       this.loadTeam(this.teamId);
+    },
+
+    beforeRouteUpdate(to, from, next) {
+      console.log('Updating route!');
+      // this.loadTeam(to.params.teamId) //instead of use watchers logic when the parameters are changing
+      //but we cant use params inside of this component
+
+      next();
     },
   };
 </script>

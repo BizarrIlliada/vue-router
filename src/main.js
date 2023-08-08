@@ -18,6 +18,11 @@ router.beforeEach((to, from, next) => {
   // } else {
   //   console.log('Not allowed to switch page!');
   // }
+  if (to.meta.someKey) {
+    console.log('Needs auth!');
+  }
+
+  console.log('Global beforeEach is always first!!!');
 
   next();
   // next(false);
@@ -27,6 +32,12 @@ router.beforeEach((to, from, next) => {
   // } else {
   //   next();
   // }
+});
+
+// eslint-disable-next-line no-unused-vars
+router.afterEach((to, from) => {
+  //good for sending some analytics data to the server after the page was routed
+  console.log('Global afterEach');
 });
 
 const app = createApp(App);

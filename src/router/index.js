@@ -20,6 +20,7 @@ export const routsObject = {
       name: 'teams',
       path: '/teams',
       components: { default: TeamsList, footer: TeamsFooter },
+      meta: { someKey: true },
       children: [
         {
           name: 'team-members',
@@ -34,6 +35,10 @@ export const routsObject = {
       name: 'users',
       path: '/users',
       components: { default: UsersList, footer: UsersFooter },
+      beforeEnter(to, from, next) {
+        console.log('When I go to user page!');
+        next();
+      },
     },
     {
       name: 'add-new-team',
@@ -59,3 +64,5 @@ export const routsObject = {
     }
   },
 }
+
+console.log(routsObject);

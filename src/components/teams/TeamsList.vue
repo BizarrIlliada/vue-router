@@ -20,6 +20,17 @@
       TeamsItem,
     },
     inject: ['teams'],
+
+    beforeRouteEnter(to, from, next) {
+      console.log('When I go to teams list page');
+      // console.log('Team list: ', to, from);
+
+      next();
+    },
+
+    mounted() {
+      console.log(this.$route.meta);
+    }
   };
 </script>
 
