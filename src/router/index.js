@@ -1,4 +1,4 @@
-import { createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import TeamsList from '../components/teams/TeamsList.vue';
 import TeamMembers from '../components/teams/TeamMembers.vue';
@@ -8,7 +8,7 @@ import UsersList from '../components/users/UsersList.vue';
 import UsersFooter from '../components/users/UsersFooter.vue';
 import NotFound from '../components/nav/NotFound.vue';
 
-export const routsObject = {
+const routsObject = {
   history: createWebHistory(),
   routes: [
     {
@@ -65,4 +65,38 @@ export const routsObject = {
   },
 }
 
-console.log(routsObject);
+const router = createRouter(routsObject)
+
+router.beforeEach((to, from, next) => {
+  // console.log(to);
+  // console.log(from);
+  // console.dir(next);
+
+  // if (to.path === '/teams' || to.path === '/users') {
+  //   next();
+  // } else {
+  //   console.log('Not allowed to switch page!');
+  // }
+  if (to.meta.someKey) {
+    console.log('Needs auth!');
+  }
+
+  console.log('Global beforeEach is always first!!!');
+
+  next();
+  // next(false);
+  // if (to.path === '/users') {
+  //   next({ name: 'teams' })
+  //   // next('/teams');
+  // } else {
+  //   next();
+  // }
+});
+
+// eslint-disable-next-line no-unused-vars
+router.afterEach((to, from) => {
+  //good for sending some analytics data to the server after the page was routed
+  console.log('Global afterEach');
+});
+
+export default router;
